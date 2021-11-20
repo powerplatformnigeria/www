@@ -1,0 +1,98 @@
+parameters:
+- name: armPath
+  type: string 
+  default: "."
+- name: subscriptionId
+  type: string 
+  default: "00000000-0000-0000-0000-000000000000"
+- name: subscriptionName
+  type: string 
+  default: 'COMPANY-PRODUCT-001'
+- name: rgName 
+  type: string 
+  default: 'COMPANY-rg-PRODUCT-001'
+- name: rgLocation 
+  type: string 
+  default: "West US 2"
+- name: planName
+  type: string 
+  default: "plan-PRODUCT-ENVIRONMENT-001"
+- name: planSku
+  type: string 
+  default: "F1"
+- name: sqlName
+  type: string 
+  default: "sql-PRODUCT-ENVIRONMENT-001"
+- name: sqlDatabase
+  type: string 
+  default: ""
+- name: sqlAdminUser
+  type: string 
+  default: "LocalAdmin"
+- name: sqlAdminPassword
+  type: string 
+  default: ""
+- name: webName
+  type: string 
+  default: "web-PRODUCT-ENVIRONMENT-001"
+
+steps:
+  - task: AzureResourceManagerTemplateDeployment@3
+    displayName: "Validate ${{ parameters.planName }}"
+    inputs:
+        deploymentScope: "Resource Group"
+        azureResourceManagerConnection: "${{ parameters.subscriptionName }}"
+        subscriptionId: "${{ parameters.subscriptionId }}"
+        action: "Create Or Update Resource Group"
+        resourceGroupName: "${{ parameters.rgName }}"
+        location: "${{ parameters.rgLocation }}"
+        templateLocation: "Linked artifact"
+        csmFile: "${{ parameters.armPath }}/plan-appplan.json"        
+        csmParametersFile: "${{ parameters.armPath }}/plan-appplan.parameters.json"        
+        deploymentMode: "Validation"
+        overrideParameters: -name "${{ parameters.planName }}" -sku "${{ parameters.planSku }}"
+
+  - task: AzureResourceManagerTemplateDeployment@3
+    displayName: "Deploy ${{ parameters.planName }}"
+    inputs:
+        deploymentScope: "Resource Group"
+        azureResourceManagerConnection: "${{ parameters.subscriptionName }}"
+        subscriptionId: "${{ parameters.subscriptionId }}"
+        action: "Create Or Update Resource Group"
+        resourceGroupName: "${{ parameters.rgName }}"
+        location: "${{ parameters.rgLocation }}"
+        templateLocation: "Linked artifact"
+        csmFile: "${{ parameters.armPath }}/plan-appplan.json"
+        csmParametersFile: "${{ parameters.armPath }}/plan-appplan.parameters.json"
+        deploymentMode: "Incremental"
+        overrideParameters: -name "${{ parameters.planName }}" -sku "${{ parameters.planSku }}"
+
+  - task: AzureResourceManagerTemplateDeployment@3
+    displayName: "Validate ${{ parameters.webName }}"
+    inputs:
+        deploymentScope: "Resource Group"
+        azureResourceManagerConnection: "${{ parameters.subscriptionName }}"
+        subscriptionId: "${{ parameters.subscriptionId }}"
+        action: "Create Or Update Resource Group"
+        resourceGroupName: "${{ parameters.rgName }}"
+        location: "${{ parameters.rgLocation }}"
+        templateLocation: "Linked artifact"
+        csmFile: "${{ parameters.armPath }}/web-webapp.json"        
+        csmParametersFile: "${{ parameters.armPath }}/web-webapp.parameters.json"        
+        deploymentMode: "Validation"
+        overrideParameters: -name "${{ parameters.webName }}" -planName "${{ parameters.planName }}"
+
+  - task: AzureResourceManagerTemplateDeployment@3
+    displayName: "Deploy ${{ parameters.webName }}"
+    inputs:
+        deploymentScope: "Resource Group"
+        azureResourceManagerConnection: "${{ parameters.subscriptionName }}"
+        subscriptionId: "${{ parameters.subscriptionId }}"
+        action: "Create Or Update Resource Group"
+        resourceGroupName: "${{ parameters.rgName }}"
+        location: "${{ parameters.rgLocation }}"
+        templateLocation: "Linked artifact"
+        csmFile: "${{ parameters.armPath }}/web-webapp.json"
+        csmParametersFile: "${{ parameters.armPath }}/web-webapp.parameters.json"
+        deploymentMode: "Incremental"
+        overrideParameters: -name "${{ parameters.webName }}" -planName "${{ parameters.planName }}"

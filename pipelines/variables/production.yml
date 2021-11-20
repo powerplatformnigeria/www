@@ -1,0 +1,23 @@
+variables:
+  - group: ppn-rg-www-prod
+  - template: common.yml
+  - name: rgEnvironment
+    value: 'Production'
+  - name: rgName
+    value: 'ppn-rg-www-prod-001'
+  - name: rgLocation
+    value: 'West US 2'
+  - name: 'appiName'
+    value: 'appi-www-prod-001'
+  - name: 'kvName'
+    value: 'kv-www-prod-001'
+  - name: planName
+    value: 'plan-www-prod-001'
+  - name: planSku
+    value: 'F1'
+  - name: stName
+    value: 'stwwwprod001'
+  - name: webName
+    value: 'web-www-prod-001'
+  - name: workName
+    value: 'work-www-prod-001'
