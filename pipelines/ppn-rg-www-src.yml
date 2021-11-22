@@ -27,13 +27,13 @@ stages:
     jobs:
       - job: build_src
         steps:
-          - template: steps/web-build-steps.yml
+          - template: steps/src-build-steps.yml
             parameters:
               archiveFile: '$(archiveFileWeb)'
               artifactsPath: '$(artifactsPath)'
               tempPath: '$(tempPath)'
               docsSitePath: '$(docsSitePath)'
-              wwwPath: '$(wwwPath)'
+              srcPath: '$(srcPath)'
 
       - job: test_src
         dependsOn: build_src
@@ -97,13 +97,13 @@ stages:
     jobs:
       - job: build_src
         steps:
-          - template: steps/web-build-steps.yml
+          - template: steps/src-build-steps.yml
             parameters:
               archiveFile: '$(archiveFileWeb)'
               artifactsPath: '$(artifactsPath)'
               tempPath: '$(tempPath)'
               docsSitePath: '$(docsSitePath)'
-              wwwPath: '$(wwwPath)'
+              srcPath: '$(srcPath)'
 
       - job: test_src
         dependsOn: build_src
