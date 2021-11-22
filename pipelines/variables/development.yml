@@ -16,7 +16,7 @@ variables:
   - name: planSku
     value: 'F1'
   - name: stName
-    value: 'stwwwdev001'
+    value: 'stwwwdev021'
   - name: webName
     value: 'web-www-dev-001'
   - name: workName
