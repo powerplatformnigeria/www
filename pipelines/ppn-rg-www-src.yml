@@ -29,10 +29,7 @@ stages:
         steps:
           - template: steps/src-build-steps.yml
             parameters:
-              archiveFile: '$(archiveFileWeb)'
               artifactsPath: '$(artifactsPath)'
-              tempPath: '$(tempPath)'
-              docsSitePath: '$(docsSitePath)'
               srcPath: '$(srcPath)'
 
       - job: test_src
@@ -99,10 +96,7 @@ stages:
         steps:
           - template: steps/src-build-steps.yml
             parameters:
-              archiveFile: '$(archiveFileWeb)'
               artifactsPath: '$(artifactsPath)'
-              tempPath: '$(tempPath)'
-              docsSitePath: '$(docsSitePath)'
               srcPath: '$(srcPath)'
 
       - job: test_src
