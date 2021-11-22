@@ -6,7 +6,7 @@ variables:
   - name: rgName
     value: 'ppn-rg-www-prod-021'
   - name: rgLocation
-    value: 'West US 2'
+    value: 'southafricanorth'
   - name: 'appiName'
     value: 'appi-www-prod-021'
   - name: 'kvName'
