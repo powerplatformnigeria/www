@@ -4,20 +4,20 @@ variables:
   - name: rgEnvironment
     value: 'Production'
   - name: rgName
-    value: 'ppn-rg-www-prod-021'
+    value: 'ppn-rg-www-prod-120'
   - name: rgLocation
     value: 'southafricanorth'
   - name: 'appiName'
-    value: 'appi-www-prod-021'
+    value: 'appi-www-prod-120'
   - name: 'kvName'
-    value: 'kv-www-prod-021'
+    value: 'kv-www-prod-120'
   - name: planName
-    value: 'plan-www-prod-021'
+    value: 'plan-www-prod-120'
   - name: planSku
     value: 'F1'
   - name: stName
-    value: 'stwwwprod021'
+    value: 'stwwwprod120'
   - name: webName
-    value: 'web-www-prod-021'
+    value: 'web-www-prod-120'
   - name: workName
-    value: 'work-www-prod-021'
+    value: 'work-www-prod-120'
